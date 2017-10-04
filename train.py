@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda
-from keras.layers import Conv2D, Cropping2D\
+from keras.layers import Conv2D, Cropping2D
 from keras import regularizers
 
 lines = []
@@ -14,7 +14,7 @@ with open('data/driving_log.csv') as csvfile:
 
 images = []
 measurements = []
-correction = [0.0, 0.35, -0.35]
+correction = [0.0, 0.25, -0.25]
 for line in lines:
     for i in range(3):
         src_path = line[i]
