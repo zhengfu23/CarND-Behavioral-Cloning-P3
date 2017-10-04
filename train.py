@@ -3,7 +3,8 @@ import cv2
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda
-from keras.layers import Conv2D, Cropping2D
+from keras.layers import Conv2D, Cropping2D\
+from keras import regularizers
 
 lines = []
 with open('data/driving_log.csv') as csvfile:
@@ -13,7 +14,7 @@ with open('data/driving_log.csv') as csvfile:
 
 images = []
 measurements = []
-correction = [0.0, 0.5, -0.5]
+correction = [0.0, 0.35, -0.35]
 for line in lines:
     for i in range(3):
         src_path = line[i]
@@ -35,20 +36,20 @@ y_train = np.array(measurements)
 model = Sequential()
 model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160, 320, 3)))
 model.add(Cropping2D(cropping=((70, 25), (0, 0))))
-model.add(Conv2D(24, 5, dilation_rate=(2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(36, 5, dilation_rate=(2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(48, 5, dilation_rate=(2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(64, 3, padding='valid', activation='relu'))
-model.add(Conv2D(64, 3, padding='valid', activation='relu'))
+model.add(Conv2D(24, 5, dilation_rate=(2, 2), padding='valid', activation='relu', kernel_regularizer=regularizers.l2(0.001)))
+model.add(Conv2D(36, 5, dilation_rate=(2, 2), padding='valid', activation='relu', kernel_regularizer=regularizers.l2(0.001)))
+model.add(Conv2D(48, 5, dilation_rate=(2, 2), padding='valid', activation='relu', kernel_regularizer=regularizers.l2(0.001)))
+model.add(Conv2D(64, 3, padding='valid', activation='relu', kernel_regularizer=regularizers.l2(0.001)))
+model.add(Conv2D(64, 3, padding='valid', activation='relu', kernel_regularizer=regularizers.l2(0.001)))
 
 model.add(Flatten())
-model.add(Dense(100, activation='relu'))
-model.add(Dense(50, activation='relu'))
-model.add(Dense(10, activation='relu'))
+model.add(Dense(100, activation='relu', kernel_regularizer=regularizers.l2(0.001)))
+model.add(Dense(50, activation='relu', kernel_regularizer=regularizers.l2(0.001)))
+model.add(Dense(10, activation='relu', kernel_regularizer=regularizers.l2(0.001)))
 
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, epochs=3)
+model.fit(X_train, y_train, validation_split=0.25, shuffle=True, epochs=4)
 
 model.save('model.h5')
