@@ -7,6 +7,7 @@ from keras.layers import Conv2D, Cropping2D
 from keras import regularizers
 
 lines = []
+
 with open('data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
@@ -51,5 +52,6 @@ model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
 model.fit(X_train, y_train, validation_split=0.25, shuffle=True, epochs=4)
+
 
 model.save('model.h5')
