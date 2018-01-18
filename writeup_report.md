@@ -7,6 +7,13 @@ The goals / steps of this project are the following:
 * Test that the model successfully drives around track one without leaving the road
 * Summarize the results with a written report
 
+[//]: # (Image References)
+
+[image1]: ./writeup_images/center_2017_10_04_10_31_34_712.jpg "Recovery Image"
+[image2]: ./writeup_images/center_2017_10_04_10_30_09_100.jpg "Normal Image"
+[image3]: ./writeup_images/flipped_center_2017_10_04_10_30_09_100.jpg "Flipped Image"
+
+
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
@@ -108,3 +115,8 @@ After the collection process, I had 10386 data points. I then preprocessed this 
 I finally randomly shuffled the data set and put 25% of the data into a validation set.
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 4 as evidenced by running the training process multiple times and realizes that validation error stops decreasing at the 4th epoch. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+![alt text][image1]
+![alt text][image2]
+![alt text][image3]
+
