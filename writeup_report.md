@@ -10,8 +10,9 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./writeup_images/center_2017_10_04_10_31_34_712.jpg "Recovery Image"
-[image2]: ./writeup_images/center_2017_10_04_10_30_09_100.jpg "Normal Image"
-[image3]: ./writeup_images/flipped_center_2017_10_04_10_30_09_100.jpg "Flipped Image"
+[image2]: ./writeup_images/center_2017_10_04_10_30_09_100.jpg "Recovery Image 2"
+[image3]: ./writeup_images/flipped.jpg "Flipped Image"
+[image4]: ./writeup_images/normal.jpg "Normal Image"
 
 
 ## Rubric Points
@@ -117,10 +118,13 @@ I finally randomly shuffled the data set and put 25% of the data into a validati
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 4 as evidenced by running the training process multiple times and realizes that validation error stops decreasing at the 4th epoch. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 ##### Recovery from right side
+![alt text][image2]
+
+##### Recovery from right side
 ![alt text][image1]
 
 ##### Normal Image
-![alt text][image2]
+![alt text][image4]
 
 ##### Flipped Image
 ![alt text][image3]
